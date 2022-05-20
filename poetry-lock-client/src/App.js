@@ -25,7 +25,7 @@ import {
     return (
       <div className='notice'>
         {(message &&
-          <Alert severity="success">
+          <Alert severity="warning">
             {message}
           </Alert>
         )}
