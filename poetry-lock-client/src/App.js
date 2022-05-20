@@ -68,10 +68,10 @@ const App =()=> {
               }, 3000)
             return
         }
-      axios.post("http://localhost:8000/upload", formData); 
+      axios.post('https://gentle-mesa-87240.herokuapp.com/upload', formData); 
 
       setTimeout(() => {
-        axios.get('http://localhost:8000/view').then(
+        axios.get('https://gentle-mesa-87240.herokuapp.com/view').then(
             response => {
                 setView(response.data)
                 window.localStorage.setItem(
