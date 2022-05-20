@@ -28,5 +28,5 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "proxy": "https://gentle-mesa-87240.herokuapp.com//upload"
+  "proxy": "https://gentle-mesa-87240.herokuapp.com/"
 }
