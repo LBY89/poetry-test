@@ -1,3 +1,5 @@
+
+
 def toml_parser(filename):
     fileData = {}
     fileArray = []
@@ -133,7 +135,7 @@ def toml_parser(filename):
         for chunk in new_file_array[i]:
             
             if "name" in chunk:
-                small_dict["name"] = chunk[chunk.index("=")+2:].replace('"', '')
+                small_dict["name"] = chunk[chunk.index("=")+2:].replace('"', '')# put in a varaible
             elif "description" in chunk:
                 small_dict["description"] = chunk[chunk.index("=")+2:].replace('"', '')
             elif "dev =" in chunk:

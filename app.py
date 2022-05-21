@@ -1,3 +1,5 @@
+import uuid 
+from flask import jsonify
 import os
 from flask import Flask, request, send_from_directory, session
 from werkzeug.utils import secure_filename
@@ -31,23 +33,24 @@ def fileUpload():
         os.mkdir(target)
     logger.info("generate view")
     file = request.files['file']
-    global filename
-    filename = secure_filename(file.filename)
-    print('filename',filename)
-    if allowed_file(filename):
-        destination = "/".join([target, filename])
+    #global filename
+    filename_id = str(uuid.uuid4())
+    print('filename',filename_id)
+    if allowed_file(file.filename):
+        filename_obj = {"id" : filename_id}
+        destination = "/".join([target, filename_id])
         file.save(destination)
         session['uploadFilePath'] = destination
-        return "upload successfully"
+        return jsonify(filename_obj)
     else: 
         logging.raiseExceptions
+     
 
-@app.route('/view', methods=['GET'])
+@app.route('/view/<file_id>', methods=['GET'])
 @cross_origin()
-def renderFile():
+def renderFile(file_id):
     
-    print('filename',filename)
-    return toml_parser('uploads/'+filename)
+    return toml_parser('uploads/'+file_id)
      
 
 if __name__ == "__main__":

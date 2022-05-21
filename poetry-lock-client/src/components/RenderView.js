@@ -1,6 +1,4 @@
-
 import React from 'react'
-import { useEffect } from 'react'
 import {
     Link,
   } from "react-router-dom"
@@ -9,13 +7,13 @@ import {TableContainer, Table, TableBody, TableRow, TableCell, Paper} from '@mat
 
 const RenderView =({view, setView})=> {
     
-    useEffect(()=>{
-        const viewData = JSON.parse(window.localStorage.getItem('dataToView'))
+    // useEffect(()=>{
+    //     const viewData = JSON.parse(window.localStorage.getItem('dataToView'))
         
-        if (viewData) {
-            setView(viewData)
-        } 
-    },[setView])
+    //     if (viewData) {
+    //         setView(viewData)
+    //     } 
+    // },[setView])
     
 
     if (view == null) {

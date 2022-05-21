@@ -3,12 +3,8 @@ import Package from './components/Package'
 import RenderView from './components/RenderView'
 import axios from 'axios'
 import React from 'react'
-
-
 import {Button, Container} from '@material-ui/core';
 import Alert from '@mui/material/Alert';
-
-
 import { useState } from 'react'
 import {
     Routes,
@@ -18,34 +14,28 @@ import {
     useMatch
   } from "react-router-dom"
 
-  const Notification =({ message }) => {
-    if (message === null) {
-      return null
-    }
-    return (
-      <div className='notice'>
-        {(message &&
-          <Alert severity="warning">
-            {message}
-          </Alert>
-        )}
-      </div>
-    )
+const Notification =({ message }) => {
+  if (message === null) {
+    return null
   }
-
+  return (
+    <div className='notice'>
+      {(message &&
+        <Alert severity="warning">
+          {message}
+        </Alert>
+      )}
+    </div>
+  )
+}
+const App =()=> {
   
-const App =()=> { 
-
-    const padding = {
-        padding: 5,
-        textDecoration: 'none',
-
-      }
-
     const [selectedFile, setSelectedFile] = useState(null)
     const [view, setView] = useState(JSON.parse(window.localStorage.getItem('dataToView')) || null)
     const [noticeMessage, setNoticeMessage] = useState(null)
-
+    const [fileId, setFileId] =useState(null)
+    console.log('fileId', fileId);
+    
     const navigate = useNavigate()
 
     const onFileChange = (event) => { 
@@ -54,41 +44,36 @@ const App =()=> {
     }; 
      
     const onFileUpload = () => { 
-      
       const formData = new FormData(); 
-      
       formData.append( 
         "file", 
         selectedFile
       ); 
-        if (!selectedFile) {
-            setNoticeMessage("Please Select a Poetry.lock File")
-            setTimeout(()=>{
-                setNoticeMessage(null)
-              }, 3000)
-            return
-        }
-      axios.post('http://127.0.0.1:5000/upload', formData); 
+      if (!selectedFile) {
+          setNoticeMessage("Please Select a Poetry.lock File")
+          setTimeout(()=>{
+              setNoticeMessage(null)
+            }, 3000)
+          return
+      }
+      axios.post('http://127.0.0.1:5000/upload', formData).then(response => {
+        console.log('response.data', response.data);
+        axios.get(`http://127.0.0.1:5000/view/${response.data.id}`).then(
+          response => {
+              setView(response.data)
+              window.localStorage.setItem(
+                  'dataToView', JSON.stringify(response.data)
+                  )
+          })
+        setFileId(response.data.id)
+      })
 
-      setTimeout(() => {
-        axios.get('http://127.0.0.1:5000/view').then(
-            response => {
-                setView(response.data)
-                window.localStorage.setItem(
-                    'dataToView', JSON.stringify(response.data)
-                    )
-            })
-    }, 500);
-        
-    setTimeout(() => {
-        navigate('/view')
-    }, 400);
-      
+    navigate('/view')
     }; 
     
     const match = useMatch("/view/:name")
-    console.log('viewDt for matching',view)
-    console.log('match', match)
+    // console.log('viewDt for matching',view)
+    // console.log('match', match)
 
     const singlePackage = match
         ? view.package.find(p => p.name === match.params.name)
@@ -115,8 +100,6 @@ const App =()=> {
                   <Route path="/view" element={<RenderView view={view} setView={setView}/>}/>
               </Routes>
         </Container>
-      )
-     
+      ) 
   } 
-
-  export default App; 
+export default App; 
