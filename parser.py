@@ -110,13 +110,20 @@ def toml_parser(filename):
     fileArray = []
     result_array = []
 
-    with open(filename, encoding = "ISO-8859-1") as file:
+    # with open(filename, encoding = "ISO-8859-1") as file:
 
-        for line in file:
-            line = line.replace("\n", "")
-            fileArray.append(line)
+    #     for line in file:
+    #         line = line.replace("\n", "")
+    #         fileArray.append(line)
+    
+    # fileArray = list(filter(None, filename.decode().split("\n")))
+    print('filename',filename.decode("ISO-8859-1"))
+    file_lines = filename.decode().split("\n")
+    print(file_lines)
+    fileArray = list(filter(None, file_lines))
+    print(fileArray)
 
-    fileArray = list(filter(None, fileArray))
+    #fileArray = list(filter(None, fileArray))
     #get each array chunck's index, using '[[package]]' as identifier
     package_index = get_index_positions(fileArray, "[[package]]")
     #get an array of arrays, each array has all the strings that represents this particular package's information.

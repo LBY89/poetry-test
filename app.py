@@ -33,24 +33,26 @@ def fileUpload():
         os.mkdir(target)
     logger.info("generate view")
     file = request.files['file']
-    #global filename
-    filename_id = str(uuid.uuid4())
-    print('filename',filename_id)
-    if allowed_file(file.filename):
-        filename_obj = {"id" : filename_id}
-        destination = "/".join([target, filename_id])
-        file.save(destination)
-        session['uploadFilePath'] = destination
-        return jsonify(filename_obj)
-    else: 
-        logging.raiseExceptions
+    #print('filecontent', file.read())
+    return toml_parser(file.read())
+    # #global filename
+    # filename_id = str(uuid.uuid4())
+    # print('filename',filename_id)
+    # if allowed_file(file.filename):
+    #     filename_obj = {"id" : filename_id}
+    #     destination = "/".join([target, filename_id])
+    #     file.save(destination)
+    #     session['uploadFilePath'] = destination
+    #     return jsonify(filename_obj)
+    # else: 
+    #     logging.raiseExceptions
      
 
-@app.route('/view/<file_id>', methods=['GET'])
-@cross_origin()
-def renderFile(file_id):
+# @app.route( methods=['GET'])
+# @cross_origin()
+# def renderFile(file_id):
     
-    return toml_parser('uploads/'+file_id)
+#     return toml_parser('uploads/'+file_id)
 
 # @app.route('/*', methods=['GET'])
 # @cross_origin()

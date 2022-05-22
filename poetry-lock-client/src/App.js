@@ -33,21 +33,9 @@ const App =()=> {
     const [selectedFile, setSelectedFile] = useState(null)
     const [view, setView] = useState(JSON.parse(window.localStorage.getItem('dataToView')) || null)
     const [noticeMessage, setNoticeMessage] = useState(null)
-    const [fileId, setFileId] =useState(null)
-    console.log('fileId', fileId);
     
     const navigate = useNavigate()
 
-    // useEffect(()=>{
-    //    if (!fileId) {
-    //     axios.get(`http://127.0.0.1:5000/view/${response.data.id}`).then(
-    //       response => {
-    //           setView(response.data)
-    
-    //       })
-    //    }
-        
-    // },[setView])
 
     const onFileChange = (event) => { 
         event.preventDefault()
@@ -71,17 +59,14 @@ const App =()=> {
       }
       axios.post('http://127.0.0.1:5000/upload', formData).then(response => {
         console.log('response', response);
-        axios.get(`http://127.0.0.1:5000/view/${response.data.id}`).then(
-          response => {
-              setView(response.data)
-              window.localStorage.setItem(
-                  'fileId', JSON.stringify(response.data)
-                  )
-          })
-        setFileId(response.data.id)
+       
+        setView(response.data)
+        window.localStorage.setItem(
+            'dataToView', JSON.stringify(response.data)
+            )
       })
-
     navigate('/view')
+    
     }; 
     
     const match = useMatch("/view/:name")
