@@ -52,11 +52,11 @@ def renderFile(file_id):
     
     return toml_parser('uploads/'+file_id)
 
-@app.route('/*', methods=['GET'])
-@cross_origin()
-def renderFile(file_id):
+# @app.route('/*', methods=['GET'])
+# @cross_origin()
+# def renderFile(file_id):
     
-    return 'try different refresh point'  
+#     return 'try different refresh point'  
 
 if __name__ == "__main__":
     app.secret_key = os.urandom(24)
