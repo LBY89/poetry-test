@@ -21,16 +21,18 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
-@app.errorhandler(404)
-def page_not_found(e):
-    # your processing here
-    return 'something bad route'
+
 
 
 @app.route('/')
 @cross_origin()
 def serve():
     return send_from_directory(app.static_folder, 'index.html')
+
+@app.errorhandler(404)
+def page_not_found(e):
+    # your processing here
+    return serve()
 
 @app.route('/upload', methods=['POST'])
 @cross_origin()
