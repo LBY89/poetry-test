@@ -20,7 +20,7 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-@app.route('/')
+@app.route('/*')
 @cross_origin()
 def serve():
     return send_from_directory(app.static_folder, 'index.html')
