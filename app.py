@@ -20,7 +20,7 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-@app.route('/')
+@app.route('/*')
 @cross_origin()
 def serve():
     return send_from_directory(app.static_folder, 'index.html')
@@ -51,7 +51,12 @@ def fileUpload():
 def renderFile(file_id):
     
     return toml_parser('uploads/'+file_id)
-     
+
+@app.route('/*', methods=['GET'])
+@cross_origin()
+def renderFile(file_id):
+    
+    return 'try different refresh point'  
 
 if __name__ == "__main__":
     app.secret_key = os.urandom(24)
