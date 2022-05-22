@@ -57,7 +57,7 @@ const App =()=> {
             }, 3000)
           return
       }
-      axios.post('https://gentle-mesa-87240.herokuapp.com:5000/upload', formData).then(response => {
+      axios.post('/upload', formData).then(response => {
         console.log('response', response);
        
         setView(response.data)
