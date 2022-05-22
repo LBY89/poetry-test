@@ -57,7 +57,7 @@ const App =()=> {
           return
       }
       axios.post('http://127.0.0.1:5000/upload', formData).then(response => {
-        console.log('response.data', response.data);
+        console.log('response', response);
         axios.get(`http://127.0.0.1:5000/view/${response.data.id}`).then(
           response => {
               setView(response.data)
