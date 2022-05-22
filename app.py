@@ -46,7 +46,7 @@ def fileUpload():
         logging.raiseExceptions
      
 
-@app.route('/view/*', methods=['GET'])
+@app.route('/view/<file_id>', methods=['GET'])
 @cross_origin()
 def renderFile(file_id):
     
