@@ -35,10 +35,10 @@ def serve():
 @app.route('/upload', methods=['POST'])
 @cross_origin()
 def fileUpload():
-    target = os.path.join(app.config['UPLOAD_FOLDER'])
-    if not os.path.isdir(target):
-        os.mkdir(target)
-    logger.info("generate view")
+    # target = os.path.join(app.config['UPLOAD_FOLDER'])
+    # if not os.path.isdir(target):
+    #     os.mkdir(target)
+    # logger.info("generate view")
     file = request.files['file']
     #print('filecontent', file.read())
     return toml_parser(file.read())
