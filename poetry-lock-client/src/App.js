@@ -3,8 +3,8 @@ import Package from './components/Package'
 import RenderView from './components/RenderView'
 import axios from 'axios'
 import React from 'react'
-import {Button, Container} from '@material-ui/core';
-import Alert from '@mui/material/Alert';
+import {Button, Container} from '@material-ui/core'
+import Alert from '@mui/material/Alert'
 import { useState } from 'react'
 import {
   Routes,
@@ -12,7 +12,7 @@ import {
   Link,
   useNavigate,
   useMatch
-} from "react-router-dom"
+} from 'react-router-dom'
 
 const Notification =({ message }) => {
   if (message === null) {
@@ -39,26 +39,26 @@ const App =()=> {
 
   const onFileChange = (event) => { 
     event.preventDefault()
-    setSelectedFile(event.target.files[0]); 
+    setSelectedFile(event.target.files[0]) 
   }; 
     
   const onFileUpload = () => { 
-    console.log('in upload click');
+    console.log('in upload click')
     
-    const formData = new FormData(); 
+    const formData = new FormData();
     formData.append( 
-      "file", 
+      'file', 
       selectedFile
-    ); 
+    )
     if (!selectedFile) {
-      setNoticeMessage("Please Select a Poetry.lock File")
+      setNoticeMessage('Please Select a Poetry.lock File')
       setTimeout(()=>{
         setNoticeMessage(null)
       }, 3000)
       return
     }
     axios.post('/upload', formData).then(response => {
-      console.log('response', response);
+      console.log('response', response)
       
       setView(response.data)
       window.localStorage.setItem(
@@ -67,9 +67,9 @@ const App =()=> {
     })
     navigate('/view')
 
-  }; 
+  }
   
-  const match = useMatch("/view/:name")
+  const match = useMatch('/view/:name')
 
   const singlePackage = match
     ? view.package.find(p => p.name === match.params.name)
@@ -98,4 +98,4 @@ const App =()=> {
     </Container>
   ) 
 } 
-export default App; 
+export default App 

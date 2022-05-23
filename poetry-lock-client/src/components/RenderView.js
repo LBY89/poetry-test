@@ -1,9 +1,9 @@
 import React from 'react'
 import {
   Link,
-} from "react-router-dom"
+} from 'react-router-dom'
 
-import {TableContainer, Table, TableBody, TableRow, TableCell, Paper} from '@material-ui/core';
+import {TableContainer, Table, TableBody, TableRow, TableCell, Paper} from '@material-ui/core'
 
 const RenderView =({view, setView})=> {
     
