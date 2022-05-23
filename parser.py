@@ -7,7 +7,7 @@ def deal_clickables(subArray):
         if 'dev' in item and 'dependencies' not in item:
             clickable = []
             non_clickable = []
-            # generate an list of strings of pkg
+            # generate an list of strings of packages
             item_array = item['dev'][1:-1].replace('"', '').split(',')
             item_array = item_array[:1] + [i.lstrip() for i in item_array[1:]]
             item_array = [i[:-10] if "(" and ")" in i else i for i in item_array ]
@@ -28,7 +28,7 @@ def deal_clickables(subArray):
             del item['dev']
 
         elif 'dependencies' in item and 'dev' not in item:
-            #print('dependencies',item['dependencies'])
+            
             clickable = []
             non_clickable = []
             item_keys = item['dependencies'].keys()
@@ -46,7 +46,7 @@ def deal_clickables(subArray):
             del item['dependencies']
         
         elif 'dev' in item and 'dependencies' in item:
-            #print('item', item)
+            
             clickable = []
             non_clickable = []
 
@@ -62,7 +62,6 @@ def deal_clickables(subArray):
                     if pkg_name_array[i] == merge_array[j]:
                         clickable.append(merge_array[j])
                     
-            #print('clickable',clickable)
             item["clickable"] = clickable
             
             for j in merge_array:
@@ -77,7 +76,8 @@ def deal_clickables(subArray):
 
     return subArray
 
-def get_index_positions(list_of_elems, element):#get each sliced array chunck's index, using '[[package]]' as identifier
+#get each sliced array chunck's index, using '[[package]]' as identifier
+def get_index_positions(list_of_elems, element):
     index_pos_list = []
     index_pos = 0
     while True:
@@ -89,7 +89,7 @@ def get_index_positions(list_of_elems, element):#get each sliced array chunck's 
             break
 
     return index_pos_list
-
+#add {'dependencies': } to data structure
 def deal_depenencies(small_list):
     depend_dict = {}
     for chunk in small_list:
@@ -109,21 +109,11 @@ def toml_parser(filename):
     fileData = {}
     fileArray = []
     result_array = []
-
-    # with open(filename, encoding = "ISO-8859-1") as file:
-
-    #     for line in file:
-    #         line = line.replace("\n", "")
-    #         fileArray.append(line)
     
-    # fileArray = list(filter(None, filename.decode().split("\n")))
-    print('filename',filename.decode("ISO-8859-1"))
     file_lines = filename.decode().split("\n")
-    print(file_lines)
+   
     fileArray = list(filter(None, file_lines))
-    print(fileArray)
-
-    #fileArray = list(filter(None, fileArray))
+    
     #get each array chunck's index, using '[[package]]' as identifier
     package_index = get_index_positions(fileArray, "[[package]]")
     #get an array of arrays, each array has all the strings that represents this particular package's information.
