@@ -13,7 +13,7 @@ logger = logging.getLogger('Upload lock file')
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'lock', 'py'}
 
 app = Flask(__name__, static_folder='poetry-lock-client/build', static_url_path='')
-app.config['UPLOAD_FOLDER'] = '/Users/baoying/Desktop/poetry-test/uploads'
+
 CORS(app, expose_headers='Authorization')
 
 def allowed_file(filename):
@@ -27,17 +27,18 @@ def serve():
 
 @app.errorhandler(404)
 def page_not_found(e):
-    # your processing here
     return serve()
 
 @app.route('/upload', methods=['POST'])
 @cross_origin()
 def fileUpload():
-    
     file = request.files['file']
-    #print('filecontent', file.read())
-    return toml_parser(file.read())
+    if allowed_file(file.filename):
+        return toml_parser(file.read())
+    else: 
+        logging.raiseExceptions
     
+
 
 if __name__ == "__main__":
     app.secret_key = os.urandom(24)

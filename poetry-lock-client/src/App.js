@@ -70,8 +70,6 @@ const App =()=> {
     }; 
     
     const match = useMatch("/view/:name")
-    // console.log('viewDt for matching',view)
-    // console.log('match', match)
 
     const singlePackage = match
         ? view.package.find(p => p.name === match.params.name)

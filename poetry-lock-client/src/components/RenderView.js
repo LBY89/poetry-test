@@ -6,17 +6,7 @@ import {
 import {TableContainer, Table, TableBody, TableRow, TableCell, Paper} from '@material-ui/core';
 
 const RenderView =({view, setView})=> {
-    console.log('renderview compo');
     
-    // useEffect(()=>{
-    //     const viewData = JSON.parse(window.localStorage.getItem('dataToView'))
-        
-    //     if (viewData) {
-    //         setView(viewData)
-    //     } 
-    // },[setView])
-    
-
     if (view == null) {
         return(
             <div>
