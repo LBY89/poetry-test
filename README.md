@@ -10,8 +10,8 @@ Flask server will parse TOML file from scracth into an ideal Json file, rendered
 
 #### Flask server
 
-1. set venv environment
-run: python -m venv venv ; source venv/bin/activate
+1. set venv environment\n
+run: python -m venv venv; source venv/bin/activate\n
 packages: pip3 install flask, pip3 install flask_cors
 2. Start it: python app.py
 
