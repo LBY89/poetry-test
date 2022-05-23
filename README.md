@@ -1,4 +1,4 @@
-# what's this App about?
+# What's this App about?
 
 #### What
 It analyses and presents Python project packages if poetry is your package management tool.
