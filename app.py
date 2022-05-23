@@ -20,10 +20,6 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-
-
-
-
 @app.route('/')
 @cross_origin()
 def serve():
@@ -37,37 +33,11 @@ def page_not_found(e):
 @app.route('/upload', methods=['POST'])
 @cross_origin()
 def fileUpload():
-    # target = os.path.join(app.config['UPLOAD_FOLDER'])
-    # if not os.path.isdir(target):
-    #     os.mkdir(target)
-    # logger.info("generate view")
+    
     file = request.files['file']
     #print('filecontent', file.read())
     return toml_parser(file.read())
-    # #global filename
-    # filename_id = str(uuid.uuid4())
-    # print('filename',filename_id)
-    # if allowed_file(file.filename):
-    #     filename_obj = {"id" : filename_id}
-    #     destination = "/".join([target, filename_id])
-    #     file.save(destination)
-    #     session['uploadFilePath'] = destination
-    #     return jsonify(filename_obj)
-    # else: 
-    #     logging.raiseExceptions
-     
-
-# @app.route( methods=['GET'])
-# @cross_origin()
-# def renderFile(file_id):
     
-#     return toml_parser('uploads/'+file_id)
-
-# @app.route('/*', methods=['GET'])
-# @cross_origin()
-# def renderFile(file_id):
-    
-#     return 'try different refresh point'  
 
 if __name__ == "__main__":
     app.secret_key = os.urandom(24)
