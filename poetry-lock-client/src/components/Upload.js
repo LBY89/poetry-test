@@ -25,7 +25,7 @@ const Upload =({onFileUpload, onFileChange, selectedFile, setNoticeMessage})=> {
       <label  htmlFor="filePicker" style={{ background:'green', padding:'5px 10px' }}>
       Choose file
       </label>
-      <input id="filePicker" style={{visibility:'hidden'}} type={'file'} accept={'.lock, .py, .png'} onChange={onFileChange}/>
+      <input id="filePicker" style={{visibility:'hidden'}} type={'file'} accept={'.lock'} onChange={onFileChange}/>
       {/* <input type="file" accept=".lock, .py"  onChange={onFileChange} />  */}
       <Button color="secondary" variant="outlined" onClick={onFileUpload}> 
           Upload! 
